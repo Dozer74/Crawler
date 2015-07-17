@@ -11,6 +11,9 @@ namespace Crawler.BL
     {
         private readonly VkApi api;
         private readonly int appId;
+        private ManualResetEvent handle;
+
+        const int LoginWaitingTimeout = 10000;
 
         public VkAuthorizer(VkApi api, int appId)
         {
@@ -18,30 +21,37 @@ namespace Crawler.BL
             this.appId = appId;
         }
 
-        public void Login()
+        public bool Login()
         {
-            var browser = new WebBrowser {ScriptErrorsSuppressed = true};
-            browser.DocumentCompleted += Browser_DocumentCompleted;
-            browser.Navigate(
-                string.Format(
-                    "http://api.vkontakte.ru/oauth/authorize?client_id={0}&scope={1}&display=popup&response_type=token",
-                    appId, VkontakteScopeList.friends));
+            handle = new ManualResetEvent(false);
 
-            while (browser.IsBusy)
+            var thread = new Thread(() =>
             {
-                Thread.Sleep(1000);
-            }
+                var browser = new WebBrowser {ScriptErrorsSuppressed = true};
+                browser.DocumentCompleted += Browser_DocumentCompleted;
+                browser.Navigate(
+                    string.Format(
+                        "http://api.vkontakte.ru/oauth/authorize?client_id={0}&scope={1}&display=popup&response_type=token",
+                        appId, VkontakteScopeList.friends));
+                Application.Run();
+            });
+            thread.SetApartmentState(ApartmentState.STA); //ActiveX-компонент WebBrowser'a может работать только в собственных апартаментах
+            thread.Start();
+            
+            return handle.WaitOne(LoginWaitingTimeout) && !string.IsNullOrEmpty(api.AccessToken);
         }
 
         private void Browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (e.Url.ToString().IndexOf("access_token") != -1)
             {
-                var myReg = new Regex(@"(?<name>[\w\d\x5f]+)=(?<value>[^\x26\s]+)",
-                    RegexOptions.IgnoreCase | RegexOptions.Singleline);
-                var accessToken = "";
-                var userId = 0;
-                foreach (Match m in myReg.Matches(e.Url.ToString()))
+                var regex = new Regex(@"(?<name>[\w\d\x5f]+)=(?<value>[^\x26\s]+)",
+                    RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+
+                string accessToken = "";
+                int userId = 0;
+
+                foreach (Match m in regex.Matches(e.Url.ToString()))
                 {
                     if (m.Groups["name"].Value == "access_token")
                     {
@@ -53,6 +63,8 @@ namespace Crawler.BL
                     }
                 }
                 api.Authorize(accessToken, userId);
+                handle.Set();
+                Application.ExitThread();
             }
         }
     }
