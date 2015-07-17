@@ -1,6 +1,6 @@
-﻿namespace Crawler
+﻿namespace Crawler.UI
 {
-    partial class Form1
+    partial class CrawlerForm
     {
         /// <summary>
         /// Требуется переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrawlerForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,7 +37,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbSearchParams = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -120,17 +120,17 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Статус:";
             // 
-            // comboBox1
+            // cbSearchParams
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbSearchParams.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSearchParams.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+            this.cbSearchParams.FormattingEnabled = true;
+            this.cbSearchParams.Items.AddRange(new object[] {
             "Число подписчиков"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 179);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(289, 33);
-            this.comboBox1.TabIndex = 12;
+            this.cbSearchParams.Location = new System.Drawing.Point(12, 179);
+            this.cbSearchParams.Name = "cbSearchParams";
+            this.cbSearchParams.Size = new System.Drawing.Size(289, 33);
+            this.cbSearchParams.TabIndex = 12;
             // 
             // label4
             // 
@@ -142,12 +142,12 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Что ищем?";
             // 
-            // Form1
+            // CrawlerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(316, 376);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbSearchParams);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.panel1);
@@ -157,7 +157,7 @@
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "CrawlerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VK Crawler";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -179,7 +179,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbSearchParams;
         private System.Windows.Forms.Label label4;
     }
 }
