@@ -1,5 +1,6 @@
 ﻿using Crawler.BL;
 using Crawler.BL.Interfaces;
+using Crawler.DAL;
 using Ninject.Modules;
 using VkNet;
 
@@ -12,7 +13,7 @@ namespace Crawler
         public override void Load()
         {
             Bind<VkApi>().ToSelf().InSingletonScope();
-
+            Bind<IDatabaseProvider>().To<EFDataProvider>();
             Bind<IConnectionChecker>().To<YandexConnectionChecker>();
             Bind<IUrlConverter>().To<VkUrlConverter>();
             Bind<IAuthorizer>().To<VkAuthorizer>().WithConstructorArgument("appId", AppId);

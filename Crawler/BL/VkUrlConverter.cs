@@ -3,12 +3,22 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using Crawler.BL.Interfaces;
+using VkNet;
+using VkNet.Enums.Filters;
+using Group = VkNet.Model.Group;
 
 namespace Crawler.BL
 {
     internal class VkUrlConverter : IUrlConverter
     {
-        public long GetGroupIdByUrl(string url)
+        private readonly VkApi api;
+
+        public VkUrlConverter(VkApi api)
+        {
+            this.api = api;
+        }
+
+        public Group GetGroupByUrl(string url)
         {
             var regex = new Regex(@"(?<=/photo-)\d+", RegexOptions.Compiled);
             var client = new WebClient {Encoding = Encoding.UTF8};
@@ -16,11 +26,11 @@ namespace Crawler.BL
             {
                 var data = client.DownloadString(url);
                 var groupId = long.Parse(regex.Match(data).Value);
-                return groupId;
+                return api.Groups.GetById(groupId, GroupsFields.MembersCount);
             }
             catch (Exception)
             {
-                return -1;
+                return null;
             }
         }
     }

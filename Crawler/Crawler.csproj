@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\DataModel.cs" />
     <Compile Include="BL\Enums\MessageType.cs" />
     <Compile Include="BL\Interfaces\IAuthorizer.cs" />
     <Compile Include="BL\Interfaces\IUrlConverter.cs" />

@@ -1,7 +1,10 @@
-﻿namespace Crawler.BL.Interfaces
+﻿using VkNet;
+using VkNet.Model;
+
+namespace Crawler.BL.Interfaces
 {
     public interface IUrlConverter
     {
-        long GetGroupIdByUrl(string url);
+        Group GetGroupByUrl(string url);
     }
 }

@@ -1,26 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Crawler.DAL
 {
     class EFDataProvider : IDatabaseProvider
     {
-        public void AddRecord()
+        private readonly StatisticDbEntities db;
+
+        public EFDataProvider()
         {
-            throw new NotImplementedException();
+            db = new StatisticDbEntities();
+        }
+
+        public void AddRecord(DataModel model)
+        {
+            db.Statistic.Add(new Statistic
+            {
+                Id = 0,
+                MembersCount = model.MembersCount,
+                UpdatingTime = model.UpdatingTime
+            });
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Truncate()
         {
-            throw new NotImplementedException();
+            db.Statistic.SqlQuery("TRUNCATE TABLE [Statistic]");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using Crawler.BL.Enums;
+using Crawler.DAL;
 using Ninject;
 
 namespace Crawler.UI
@@ -13,10 +14,6 @@ namespace Crawler.UI
         {
             InitializeComponent();
             cbSearchParams.SelectedIndex = 0;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -33,6 +30,11 @@ namespace Crawler.UI
         private void Crawler_Update(MessageType type, string message)
         {
             lbStatus.Items.Add(message);
+        }
+
+        private void CrawlerForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

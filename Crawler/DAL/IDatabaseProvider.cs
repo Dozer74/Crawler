@@ -2,7 +2,7 @@
 {
     public interface IDatabaseProvider
     {
-        void AddRecord();
+        void AddRecord(DataModel model);
 
         void SaveChanges();
 
