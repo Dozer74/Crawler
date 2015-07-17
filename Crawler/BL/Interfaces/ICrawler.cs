@@ -1,4 +1,4 @@
-﻿namespace Crawler.BL
+﻿namespace Crawler.BL.Interfaces
 {
     public interface ICrawler
     {

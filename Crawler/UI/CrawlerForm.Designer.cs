@@ -35,10 +35,10 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.tbGroupUrl = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbSearchParams = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.lbStatus = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -81,6 +81,7 @@
             this.btnStart.TabIndex = 9;
             this.btnStart.Text = "Старт!";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // tbGroupUrl
             // 
@@ -100,15 +101,6 @@
             this.label2.Size = new System.Drawing.Size(164, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "Выберите группу:";
-            // 
-            // lbStatus
-            // 
-            this.lbStatus.Font = new System.Drawing.Font("Segoe UI", 12.25F);
-            this.lbStatus.Location = new System.Drawing.Point(87, 289);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(214, 72);
-            this.lbStatus.TabIndex = 11;
-            this.lbStatus.Text = "К работе готов!";
             // 
             // label3
             // 
@@ -142,14 +134,22 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Что ищем?";
             // 
+            // lbStatus
+            // 
+            this.lbStatus.FormattingEnabled = true;
+            this.lbStatus.Location = new System.Drawing.Point(91, 289);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(213, 69);
+            this.lbStatus.TabIndex = 13;
+            // 
             // CrawlerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(316, 376);
+            this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.cbSearchParams);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tbGroupUrl);
@@ -177,10 +177,10 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox tbGroupUrl;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSearchParams;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox lbStatus;
     }
 }
 
