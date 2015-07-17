@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Crawler.BL.Enums;
+﻿using Crawler.BL.Enums;
 using Crawler.BL.Interfaces;
 
 namespace Crawler.BL
@@ -12,13 +7,13 @@ namespace Crawler.BL
     {
         private readonly IConnectionChecker checker;
         private readonly IUrlConverter converter;
-        private readonly VkAuthorizer authorizer;
+        private readonly IAuthorizer authorizer;
 
         public delegate void UpdateDelegate(MessageType type, string message);
 
         public event UpdateDelegate Update;
 
-        public Crawler(IConnectionChecker checker, IUrlConverter converter, VkAuthorizer authorizer)
+        public Crawler(IConnectionChecker checker, IUrlConverter converter, IAuthorizer authorizer)
         {
             this.checker = checker;
             this.converter = converter;
@@ -42,7 +37,11 @@ namespace Crawler.BL
             }
             Update(MessageType.Working, "Поиск группы - ОК");
 
-            authorizer.Login();
+            if (!authorizer.Login())
+            {
+                Update(MessageType.Error, "Группа не найдена! :(");
+                return;
+            }
 
         }
 

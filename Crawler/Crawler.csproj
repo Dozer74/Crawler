@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\Enums\MessageType.cs" />
+    <Compile Include="BL\Interfaces\IAuthorizer.cs" />
     <Compile Include="BL\Interfaces\IUrlConverter.cs" />
     <Compile Include="BL\YandexConnectionChecker.cs" />
     <Compile Include="BL\Crawler.cs" />

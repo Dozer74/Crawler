@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Crawler.BL.Enums;
 using Ninject;
-using VkNet;
 
 namespace Crawler.UI
 {

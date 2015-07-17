@@ -1,6 +1,5 @@
 ﻿using Crawler.BL;
 using Crawler.BL.Interfaces;
-using Ninject;
 using Ninject.Modules;
 using VkNet;
 
@@ -16,7 +15,7 @@ namespace Crawler
 
             Bind<IConnectionChecker>().To<YandexConnectionChecker>();
             Bind<IUrlConverter>().To<VkUrlConverter>();
-            Bind<VkAuthorizer>().ToSelf().WithConstructorArgument("appId", AppId);
+            Bind<IAuthorizer>().To<VkAuthorizer>().WithConstructorArgument("appId", AppId);
             Bind<BL.Crawler>().ToSelf();
         }
     }

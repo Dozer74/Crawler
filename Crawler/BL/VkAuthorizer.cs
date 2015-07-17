@@ -3,11 +3,12 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using Crawler.BL.Enums;
+using Crawler.BL.Interfaces;
 using VkNet;
 
 namespace Crawler.BL
 {
-    internal class VkAuthorizer
+    internal class VkAuthorizer : IAuthorizer
     {
         private readonly VkApi api;
         private readonly int appId;
