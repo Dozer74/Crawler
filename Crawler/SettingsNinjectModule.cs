@@ -14,6 +14,7 @@ namespace Crawler
         {
             Bind<VkApi>().ToSelf().InSingletonScope();
             Bind<IDatabaseProvider>().To<EFDataProvider>();
+            Bind<IGroupInfoProvider>().To<EFGroupInfoProvider>();
             Bind<IConnectionChecker>().To<YandexConnectionChecker>();
             Bind<IUrlConverter>().To<VkUrlConverter>();
             Bind<IAuthorizer>().To<VkAuthorizer>().WithConstructorArgument("appId", AppId);

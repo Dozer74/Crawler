@@ -10,18 +10,20 @@ namespace Crawler.BL
         private readonly IConnectionChecker checker;
         private readonly IUrlConverter converter;
         private readonly IAuthorizer authorizer;
-        private readonly IDatabaseProvider provider;
+        private readonly IDatabaseProvider dbProvider;
+        private readonly IGroupInfoProvider groupInfoProvider;
 
         public delegate void UpdateDelegate(MessageType type, string message);
 
         public event UpdateDelegate Update;
 
-        public Crawler(IConnectionChecker checker, IUrlConverter converter, IAuthorizer authorizer, IDatabaseProvider provider)
+        public Crawler(IConnectionChecker checker, IUrlConverter converter, IAuthorizer authorizer, IDatabaseProvider databaseDbProvider, IGroupInfoProvider groupInfoProvider)
         {
             this.checker = checker;
             this.converter = converter;
             this.authorizer = authorizer;
-            this.provider = provider;
+            this.dbProvider = databaseDbProvider;
+            this.groupInfoProvider = groupInfoProvider;
         }
 
         public void ProcessGroup(string url)
@@ -55,8 +57,11 @@ namespace Crawler.BL
                 UpdatingTime = DateTime.Now
             };
 
-            provider.AddRecord(data);
-            provider.SaveChanges();
+            dbProvider.AddRecord(data);
+            dbProvider.SaveChanges();
+
+            groupInfoProvider.UpdateGroupInfo(group.Name,url);
+
             Update(MessageType.Complited, "База успешно обновлена!");
         }
 

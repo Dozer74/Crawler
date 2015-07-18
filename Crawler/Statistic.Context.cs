@@ -26,5 +26,6 @@ namespace Crawler
         }
     
         public virtual DbSet<Statistic> Statistic { get; set; }
+        public virtual DbSet<GroupInfo> GroupInfo { get; set; }
     }
 }

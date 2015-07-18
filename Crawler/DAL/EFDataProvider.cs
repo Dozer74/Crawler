@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace Crawler.DAL
 {
     class EFDataProvider : IDatabaseProvider
