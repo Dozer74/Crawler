@@ -14,7 +14,7 @@ namespace Crawler.BL
         private readonly int appId;
         private ManualResetEvent handle;
 
-        const int LoginWaitingTimeout = 10000;
+        const int LoginWaitingTimeout = 10000; //in ms
 
         public VkAuthorizer(VkApi api, int appId)
         {

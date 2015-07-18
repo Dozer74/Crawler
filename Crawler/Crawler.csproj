@@ -92,7 +92,7 @@
     <Compile Include="BL\Enums\MessageType.cs" />
     <Compile Include="BL\Interfaces\IAuthorizer.cs" />
     <Compile Include="BL\Interfaces\IUrlConverter.cs" />
-    <Compile Include="BL\YandexConnectionChecker.cs" />
+    <Compile Include="BL\ConnectionChecker.cs" />
     <Compile Include="BL\Crawler.cs" />
     <Compile Include="BL\Interfaces\IConnectionChecker.cs" />
     <Compile Include="BL\Interfaces\ICrawler.cs" />

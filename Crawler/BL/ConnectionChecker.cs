@@ -5,8 +5,15 @@ using Crawler.BL.Interfaces;
 
 namespace Crawler.BL
 {
-    internal class YandexConnectionChecker : IConnectionChecker
+    internal class ConnectionChecker : IConnectionChecker
     {
+        private readonly Uri urlForConnectionTest;
+
+        public ConnectionChecker(Uri urlForConnectionTest)
+        {
+            this.urlForConnectionTest = urlForConnectionTest;
+        }
+
         public bool IsConnected()
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -17,7 +24,7 @@ namespace Crawler.BL
             var client = new WebClient();
             try
             {
-                var response = client.DownloadString("http://ya.ru/");
+                var response = client.DownloadString(urlForConnectionTest);
                 return !string.IsNullOrEmpty(response);
             }
             catch (Exception)
