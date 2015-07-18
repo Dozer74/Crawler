@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CrawlerForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -38,7 +39,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbSearchParams = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.lbStatus = new System.Windows.Forms.ListBox();
+            this.listViewStatus = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +109,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12.25F);
-            this.label3.Location = new System.Drawing.Point(17, 289);
+            this.label3.Location = new System.Drawing.Point(17, 324);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 23);
             this.label3.TabIndex = 11;
@@ -134,20 +137,38 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Что ищем?";
             // 
-            // lbStatus
+            // listViewStatus
             // 
-            this.lbStatus.FormattingEnabled = true;
-            this.lbStatus.Location = new System.Drawing.Point(91, 289);
-            this.lbStatus.Name = "lbStatus";
-            this.lbStatus.Size = new System.Drawing.Size(213, 69);
-            this.lbStatus.TabIndex = 13;
+            this.listViewStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listViewStatus.GridLines = true;
+            this.listViewStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewStatus.Location = new System.Drawing.Point(87, 289);
+            this.listViewStatus.Name = "listViewStatus";
+            this.listViewStatus.Size = new System.Drawing.Size(217, 93);
+            this.listViewStatus.StateImageList = this.imageList1;
+            this.listViewStatus.TabIndex = 14;
+            this.listViewStatus.UseCompatibleStateImageBehavior = false;
+            this.listViewStatus.View = System.Windows.Forms.View.Details;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "ok.png");
+            this.imageList1.Images.SetKeyName(1, "error.png");
+            this.imageList1.Images.SetKeyName(2, "ok.png");
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 210;
             // 
             // CrawlerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 376);
-            this.Controls.Add(this.lbStatus);
+            this.ClientSize = new System.Drawing.Size(316, 394);
+            this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.cbSearchParams);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
@@ -180,7 +201,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSearchParams;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox lbStatus;
+        private System.Windows.Forms.ListView listViewStatus;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 

@@ -2,8 +2,8 @@
 {
     public enum MessageType
     {
-        Working,
-        Complited,
-        Error
+        Working = 0,
+        Error = 1,
+        Complited = 2
     }
 }

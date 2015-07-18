@@ -168,6 +168,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\error.png" />
+    <Content Include="Icons\ok.png" />
     <Content Include="Statistic.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Statistic.edmx</DependentUpon>

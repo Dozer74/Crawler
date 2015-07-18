@@ -23,7 +23,7 @@ namespace Crawler.UI
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            lbStatus.Items.Clear();
+            listViewStatus.Items.Clear();
 
             if (!ContinueIfGroupsNotSame())
                 return;
@@ -56,7 +56,7 @@ namespace Crawler.UI
 
         private void Crawler_Update(MessageType type, string message)
         {
-            lbStatus.Items.Add(message);
+            listViewStatus.Items.Add(new ListViewItem(message) {StateImageIndex = (int) type});
         }
 
         private void CrawlerForm_Load(object sender, EventArgs e)
