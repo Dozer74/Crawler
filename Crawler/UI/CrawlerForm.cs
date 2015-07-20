@@ -11,6 +11,7 @@ namespace Crawler.UI
     {
         readonly IKernel kernel = new StandardKernel(new SettingsNinjectModule());
         private readonly IGroupInfoProvider infoProvider;
+        private readonly IDatabaseProvider dataProvider;
 
 
         public CrawlerForm()
@@ -18,6 +19,7 @@ namespace Crawler.UI
             InitializeComponent();
             cbSearchParams.SelectedIndex = 0;
             infoProvider = kernel.Get<IGroupInfoProvider>();
+            dataProvider = kernel.Get<IDatabaseProvider>();
 
         }
 
@@ -47,8 +49,6 @@ namespace Crawler.UI
                     tbGroupUrl.Focus();
                     return false;
                 }
-
-                var dataProvider = kernel.Get<IDatabaseProvider>();
                 dataProvider.Truncate();
             }
             return true;
@@ -62,6 +62,17 @@ namespace Crawler.UI
         private void CrawlerForm_Load(object sender, EventArgs e)
         {
             tbGroupUrl.Text = infoProvider.GetSavedGroupUrl();
+        }
+
+        private void TrancuteMenuItem_Click(object sender, EventArgs e)
+        {
+            dataProvider.Truncate();
+        }
+
+        private void ShowDataMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ShowDataForm(infoProvider,dataProvider);
+            form.ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Crawler.DAL
@@ -29,7 +30,15 @@ namespace Crawler.DAL
 
         public void Truncate()
         {
-            db.Statistic.SqlQuery("TRUNCATE TABLE [Statistic]");
+            db.Statistic.RemoveRange(db.Statistic);
+            db.SaveChanges();
+        }
+
+        public IEnumerable<DataModel> GetAllRecords()
+        {
+            return
+                db.Statistic.ToList()
+                    .Select(m => new DataModel {MembersCount = m.MembersCount, UpdatingTime = m.UpdatingTime});
         }
     }
 }

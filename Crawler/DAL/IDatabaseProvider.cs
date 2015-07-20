@@ -1,4 +1,6 @@
-﻿namespace Crawler.DAL
+﻿using System.Collections.Generic;
+
+namespace Crawler.DAL
 {
     public interface IDatabaseProvider
     {
@@ -7,5 +9,7 @@
         void SaveChanges();
 
         void Truncate();
+
+        IEnumerable<DataModel> GetAllRecords();
     }
 }
