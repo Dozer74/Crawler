@@ -17,7 +17,7 @@ namespace CrawlerApp.BL
 
         public event UpdateDelegate Update;
 
-        public Crawler(IConnectionChecker checker, IUrlConverter converter, IAuthorizer authorizer, IDatabaseProvider databaseDbProvider, IGroupInfoProvider groupInfoProvider)
+        public Crawler(IConnectionChecker checker, IAuthorizer authorizer, IUrlConverter converter, IDatabaseProvider databaseDbProvider, IGroupInfoProvider groupInfoProvider)
         {
             this.checker = checker;
             this.converter = converter;
@@ -30,27 +30,27 @@ namespace CrawlerApp.BL
         {
             if (!checker.IsConnected())
             {
-                Update(MessageType.Error, "Проблемы с Интернет соединением! :(");
+                OnUpdate(MessageType.Error, "Проблемы с Интернет соединением! :(");
                 return;
             }
-            Update(MessageType.Working, "Соединение с Интернет - ОК");
+            OnUpdate(MessageType.Working, "Соединение с Интернет - ОК");
 
             if (!authorizer.Login())
             {
-                Update(MessageType.Error, "Не удаётся залогиниться! :(");
+                OnUpdate(MessageType.Error, "Не удаётся залогиниться! :(");
                 return;
             }
-            Update(MessageType.Working, "Вход на сайт - ОК");
+            OnUpdate(MessageType.Working, "Вход на сайт - ОК");
 
             var group = converter.GetGroupByUrl(url);
             if (group == null)
             {
-                Update(MessageType.Error, "Группа не найдена! :(");
+                OnUpdate(MessageType.Error, "Группа не найдена! :(");
                 return;
             }
-            Update(MessageType.Working, "Поиск группы - ОК");
+            OnUpdate(MessageType.Working, "Поиск группы - ОК");
 
-            Update(MessageType.Working, "Собираю информацию...");
+            OnUpdate(MessageType.Working, "Собираю информацию...");
             var data = new DataModel
             {
                 MembersCount = group.MembersCount ?? 0,
@@ -62,7 +62,7 @@ namespace CrawlerApp.BL
 
             groupInfoProvider.UpdateGroupInfo(group.Name,url);
 
-            Update(MessageType.Complited, "База успешно обновлена!");
+            OnUpdate(MessageType.Complited, "База успешно обновлена!");
         }
 
         #region Invocators
