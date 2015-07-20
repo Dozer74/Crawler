@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Crawler.DAL
+namespace CrawlerApp.DAL
 {
     public struct DataModel
     {

@@ -1,4 +1,4 @@
-﻿namespace Crawler.UI
+﻿namespace CrawlerApp.UI
 {
     partial class CrawlerForm
     {

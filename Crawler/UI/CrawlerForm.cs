@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using Crawler.BL.Enums;
-using Crawler.DAL;
-using Crawler.Properties;
+using CrawlerApp.BL.Enums;
+using CrawlerApp.DAL;
+using CrawlerApp.Properties;
 using Ninject;
 
-namespace Crawler.UI
+namespace CrawlerApp.UI
 {
     public partial class CrawlerForm : Form
     {

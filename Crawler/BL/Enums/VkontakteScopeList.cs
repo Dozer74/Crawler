@@ -1,6 +1,6 @@
 using System;
 
-namespace Crawler.BL.Enums
+namespace CrawlerApp.BL.Enums
 {
     [Flags]
     internal enum VkontakteScopeList

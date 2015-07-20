@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using Crawler.UI;
-using Ninject;
+using CrawlerApp.UI;
 
-namespace Crawler
+namespace CrawlerApp
 {
     internal static class Program
     {

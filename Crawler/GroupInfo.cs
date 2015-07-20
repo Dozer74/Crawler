@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Crawler
+namespace CrawlerApp
 {
     using System;
     using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Crawler.DAL
+namespace CrawlerApp.DAL
 {
     internal class EFGroupInfoProvider : IGroupInfoProvider
     {

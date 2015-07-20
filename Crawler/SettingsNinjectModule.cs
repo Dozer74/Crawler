@@ -1,11 +1,11 @@
 ﻿using System;
-using Crawler.BL;
-using Crawler.BL.Interfaces;
-using Crawler.DAL;
+using CrawlerApp.BL;
+using CrawlerApp.BL.Interfaces;
+using CrawlerApp.DAL;
 using Ninject.Modules;
 using VkNet;
 
-namespace Crawler
+namespace CrawlerApp
 {
     public class SettingsNinjectModule : NinjectModule
     {

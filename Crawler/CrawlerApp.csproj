@@ -7,7 +7,7 @@
     <ProjectGuid>{A3270E5D-AA61-43FA-8D61-7029812FA28A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Crawler</RootNamespace>
+    <RootNamespace>CrawlerApp</RootNamespace>
     <AssemblyName>Crawler</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

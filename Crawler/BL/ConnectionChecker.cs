@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Net.NetworkInformation;
-using Crawler.BL.Interfaces;
+using CrawlerApp.BL.Interfaces;
 
-namespace Crawler.BL
+namespace CrawlerApp.BL
 {
     internal class ConnectionChecker : IConnectionChecker
     {

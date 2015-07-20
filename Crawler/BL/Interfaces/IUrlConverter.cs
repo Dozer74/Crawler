@@ -1,7 +1,6 @@
-﻿using VkNet;
-using VkNet.Model;
+﻿using VkNet.Model;
 
-namespace Crawler.BL.Interfaces
+namespace CrawlerApp.BL.Interfaces
 {
     public interface IUrlConverter
     {

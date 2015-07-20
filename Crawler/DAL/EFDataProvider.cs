@@ -1,8 +1,7 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Crawler.DAL
+namespace CrawlerApp.DAL
 {
     class EFDataProvider : IDatabaseProvider
     {

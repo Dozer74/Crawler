@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Crawler.DAL;
+using CrawlerApp.DAL;
 
-namespace Crawler.UI
+namespace CrawlerApp.UI
 {
     public partial class ShowDataForm : Form
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Crawler.DAL
+namespace CrawlerApp.DAL
 {
     public interface IDatabaseProvider
     {

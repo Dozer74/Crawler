@@ -1,4 +1,4 @@
-﻿namespace Crawler.BL.Interfaces
+﻿namespace CrawlerApp.BL.Interfaces
 {
     public interface IAuthorizer
     {

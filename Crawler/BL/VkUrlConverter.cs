@@ -2,12 +2,12 @@
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Crawler.BL.Interfaces;
+using CrawlerApp.BL.Interfaces;
 using VkNet;
 using VkNet.Enums.Filters;
 using Group = VkNet.Model.Group;
 
-namespace Crawler.BL
+namespace CrawlerApp.BL
 {
     internal class VkUrlConverter : IUrlConverter
     {

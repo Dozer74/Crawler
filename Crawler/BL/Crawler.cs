@@ -1,11 +1,11 @@
 ﻿using System;
-using Crawler.BL.Enums;
-using Crawler.BL.Interfaces;
-using Crawler.DAL;
+using CrawlerApp.BL.Enums;
+using CrawlerApp.BL.Interfaces;
+using CrawlerApp.DAL;
 
-namespace Crawler.BL
+namespace CrawlerApp.BL
 {
-    class Crawler : ICrawler
+    public class Crawler : ICrawler
     {
         private readonly IConnectionChecker checker;
         private readonly IUrlConverter converter;

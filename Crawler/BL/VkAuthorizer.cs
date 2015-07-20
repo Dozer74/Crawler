@@ -2,11 +2,11 @@
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using Crawler.BL.Enums;
-using Crawler.BL.Interfaces;
+using CrawlerApp.BL.Enums;
+using CrawlerApp.BL.Interfaces;
 using VkNet;
 
-namespace Crawler.BL
+namespace CrawlerApp.BL
 {
     internal class VkAuthorizer : IAuthorizer
     {
