@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using CrawlerApp.BL.Enums;
 using CrawlerApp.BL.Interfaces;
@@ -87,6 +88,11 @@ namespace CrawlerApp.UI
                 return false;
             }
             return true;
+        }
+
+        private void LaunchWebSiteMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://vkcrawler.azurewebsites.net/");
         }
     }
 }

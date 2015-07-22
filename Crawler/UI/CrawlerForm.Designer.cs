@@ -46,6 +46,7 @@
             this.менюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TrancuteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ShowDataMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LaunchWebSiteMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -171,7 +172,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.менюToolStripMenuItem});
+            this.менюToolStripMenuItem,
+            this.LaunchWebSiteMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(316, 24);
@@ -200,6 +202,13 @@
             this.ShowDataMenuItem.Size = new System.Drawing.Size(182, 22);
             this.ShowDataMenuItem.Text = "Отобразить данные";
             this.ShowDataMenuItem.Click += new System.EventHandler(this.ShowDataMenuItem_Click);
+            // 
+            // LaunchWebSiteMenuItem
+            // 
+            this.LaunchWebSiteMenuItem.Name = "LaunchWebSiteMenuItem";
+            this.LaunchWebSiteMenuItem.Size = new System.Drawing.Size(151, 20);
+            this.LaunchWebSiteMenuItem.Text = "Открыть веб интерфейс";
+            this.LaunchWebSiteMenuItem.Click += new System.EventHandler(this.LaunchWebSiteMenuItem_Click);
             // 
             // CrawlerForm
             // 
@@ -250,6 +259,7 @@
         private System.Windows.Forms.ToolStripMenuItem менюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TrancuteMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ShowDataMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LaunchWebSiteMenuItem;
     }
 }
 

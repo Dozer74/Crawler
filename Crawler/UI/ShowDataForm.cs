@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using CrawlerApp.BL.Interfaces;
 using CrawlerApp.DAL;
 
 namespace CrawlerApp.UI
