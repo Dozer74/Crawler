@@ -23,21 +23,27 @@ namespace CrawlerApp.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SavedGroupName {
             get {
                 return ((string)(this["SavedGroupName"]));
             }
+            set {
+                this["SavedGroupName"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SavedGroupUrl {
             get {
                 return ((string)(this["SavedGroupUrl"]));
+            }
+            set {
+                this["SavedGroupUrl"] = value;
             }
         }
     }

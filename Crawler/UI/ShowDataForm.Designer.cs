@@ -160,7 +160,7 @@
             this.MaximizeBox = false;
             this.Name = "ShowDataForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ShowDataForm";
+            this.Text = "Отобразить данные";
             this.Load += new System.EventHandler(this.ShowDataForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -5,7 +5,7 @@
         /// <summary>
         /// Проверяет, совпадают ли имена новой группы и сохраненной ранее в базе
         /// </summary>
-        bool IsGroupUrlSame(string groupName);
+        bool IsGroupUrlSame(string groupUrl);
 
         /// <summary>
         /// Возвращает url сохраненной в базе группы

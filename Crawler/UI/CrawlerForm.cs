@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using CrawlerApp.BL.Enums;
+using CrawlerApp.BL.Interfaces;
 using CrawlerApp.DAL;
 using CrawlerApp.Properties;
 using Ninject;
@@ -70,7 +71,8 @@ namespace CrawlerApp.UI
 
         private void ShowDataMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ShowDataForm(infoProvider,dataProvider);
+            var connection = kernel.Get<IConnectionChecker>();
+            var form = new ShowDataForm(connection, infoProvider,dataProvider);
             form.ShowDialog();
         }
     }
