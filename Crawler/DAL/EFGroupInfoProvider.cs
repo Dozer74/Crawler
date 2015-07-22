@@ -4,7 +4,7 @@ namespace CrawlerApp.DAL
 {
     internal class EFGroupInfoProvider : IGroupInfoProvider
     {
-        private readonly StatisticDbEntities db = new StatisticDbEntities();
+        private readonly StatisticEntities db = new StatisticEntities();
 
         public bool IsGroupUrlSame(string groupName)
         {

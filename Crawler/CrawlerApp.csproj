@@ -191,13 +191,6 @@
       <DependentUpon>Statistic.edmx</DependentUpon>
       <LastGenOutput>Statistic1.cs</LastGenOutput>
     </Content>
-    <Content Include="StatisticDb.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="StatisticDb_log.ldf">
-      <DependentUpon>StatisticDb.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

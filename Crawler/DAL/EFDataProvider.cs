@@ -5,11 +5,11 @@ namespace CrawlerApp.DAL
 {
     class EFDataProvider : IDatabaseProvider
     {
-        private readonly StatisticDbEntities db;
+        private readonly StatisticEntities db;
 
         public EFDataProvider()
         {
-            db = new StatisticDbEntities();
+            db = new StatisticEntities();
         }
 
         public void AddRecord(DataModel model)

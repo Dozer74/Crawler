@@ -38,7 +38,6 @@ namespace CrawlerApp.UI
 
         private bool ContinueIfGroupsNotSame()
         {
-
             if (!infoProvider.IsGroupUrlSame(tbGroupUrl.Text))
             {
                 if (MessageBox.Show(Resources.NewGroupMessage,"Внимание!",
