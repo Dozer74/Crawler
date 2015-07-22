@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Forms;
-using CrawlerApp.BL.Enums;
-using CrawlerApp.BL.Interfaces;
+﻿using CrawlerApp.BL.Interfaces;
 using VkNet;
+using VkNet.Enums.Filters;
+using VkNet.Exception;
 
 namespace CrawlerApp.BL
 {
@@ -12,61 +9,30 @@ namespace CrawlerApp.BL
     {
         private readonly VkApi api;
         private readonly int appId;
-        private ManualResetEvent handle;
+        private readonly string userName;
+        private readonly string password;
 
-        const int LoginWaitingTimeout = 10000; //in ms
-
-        public VkAuthorizer(VkApi api, int appId)
+        public VkAuthorizer(VkApi api, int appId, string userName, string password)
         {
             this.api = api;
             this.appId = appId;
+            this.userName = userName;
+            this.password = password;
         }
 
         public bool Login()
         {
-            handle = new ManualResetEvent(false);
-
-            var thread = new Thread(() =>
+            api.Authorize(appId,userName,password,Settings.Groups);
+            try
             {
-                var browser = new WebBrowser {ScriptErrorsSuppressed = true};
-                browser.DocumentCompleted += Browser_DocumentCompleted;
-                browser.Navigate(
-                    string.Format(
-                        "http://api.vkontakte.ru/oauth/authorize?client_id={0}&scope={1}&display=popup&response_type=token",
-                        appId, VkontakteScopeList.friends));
-                Application.Run();
-            });
-            thread.SetApartmentState(ApartmentState.STA); //ActiveX-компонент WebBrowser'a может работать только в собственных апартаментах
-            thread.Start();
-            
-            return handle.WaitOne(LoginWaitingTimeout) && !string.IsNullOrEmpty(api.AccessToken);
-        }
-
-        private void Browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            if (e.Url.ToString().IndexOf("access_token") != -1)
-            {
-                var regex = new Regex(@"(?<name>[\w\d\x5f]+)=(?<value>[^\x26\s]+)",
-                    RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
-
-                string accessToken = "";
-                int userId = 0;
-
-                foreach (Match m in regex.Matches(e.Url.ToString()))
-                {
-                    if (m.Groups["name"].Value == "access_token")
-                    {
-                        accessToken = m.Groups["value"].Value;
-                    }
-                    else if (m.Groups["name"].Value == "user_id")
-                    {
-                        userId = Convert.ToInt32(m.Groups["value"].Value);
-                    }
-                }
-                api.Authorize(accessToken, userId);
-                handle.Set();
-                Application.ExitThread();
+                var user = api.Users.Get(1);
             }
+            catch (AccessTokenInvalidException)
+            {
+                return false;
+            }
+            return true;
         }
+        
     }
 }

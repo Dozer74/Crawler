@@ -9,7 +9,9 @@ namespace CrawlerApp
 {
     public class SettingsNinjectModule : NinjectModule
     {
-        const int AppId = 4988419; // Id приложения на сайте ВКонтакте
+        const int AppId = 4988419; 
+        private const string UserName = "VKCrawler@yandex.ru";
+        private const string Password = "qwaszxerdfcv1234"; // Данные для авторизации на сайте ВКонтакте
 
         public override void Load()
         {
@@ -22,7 +24,10 @@ namespace CrawlerApp
                 .To<ConnectionChecker>()
                 .WithConstructorArgument("urlForConnectionTest", new Uri("http://vk.com"));
             Bind<IUrlConverter>().To<VkUrlConverter>();
-            Bind<IAuthorizer>().To<VkAuthorizer>().WithConstructorArgument("appId", AppId);
+            Bind<IAuthorizer>().To<VkAuthorizer>()
+                .WithConstructorArgument("appId", AppId)
+                .WithConstructorArgument("userName", UserName)
+                .WithConstructorArgument("password", Password);
 
             Bind<BL.Crawler>().ToSelf();
         }
