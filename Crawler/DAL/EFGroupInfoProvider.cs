@@ -28,21 +28,8 @@ namespace CrawlerApp.DAL
 
         public void UpdateGroupInfo(string groupName, string groupUrl)
         {
-            var info = new GroupInfo
-            {
-                GroupName = groupName,
-                GroupUrl = groupUrl
-            };
-
-            var currentInfo = db.GroupInfo.FirstOrDefault();
-            if (currentInfo == null)
-            {
-                db.GroupInfo.Add(info);
-            }
-            else
-            {
-                currentInfo = info;//обновляем в БД
-            }
+            db.GroupInfo.RemoveRange(db.GroupInfo);
+            db.GroupInfo.Add(new GroupInfo {GroupName = groupName, GroupUrl = groupUrl});
 
             db.SaveChanges();
 
