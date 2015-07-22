@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CrawlerApp.DAL
@@ -12,25 +13,49 @@ namespace CrawlerApp.DAL
             db = new StatisticEntities();
         }
 
-        public void AddRecord(DataModel model)
+        public bool AddRecord(DataModel model)
         {
-            db.Statistic.Add(new Statistic
+            try
             {
-                Id = 0,
-                MembersCount = model.MembersCount,
-                UpdatingTime = model.UpdatingTime
-            });
+                db.Statistic.Add(new Statistic
+                {
+                    Id = 0,
+                    MembersCount = model.MembersCount,
+                    UpdatingTime = model.UpdatingTime
+                });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void SaveChanges()
+        public bool SaveChanges()
         {
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void Truncate()
+        public bool Truncate()
         {
-            db.Statistic.RemoveRange(db.Statistic);
-            db.SaveChanges();
+            try
+            {
+                db.Statistic.RemoveRange(db.Statistic);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<DataModel> GetAllRecords()

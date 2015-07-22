@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CrawlerApp.BL.Interfaces;
@@ -8,13 +9,11 @@ namespace CrawlerApp.UI
 {
     public partial class ShowDataForm : Form
     {
-        private readonly IConnectionChecker connection;
         private readonly IGroupInfoProvider infoProvider;
         private readonly IDatabaseProvider dataProvider;
 
-        public ShowDataForm(IConnectionChecker connection, IGroupInfoProvider infoProvider, IDatabaseProvider dataProvider)
+        public ShowDataForm(IGroupInfoProvider infoProvider, IDatabaseProvider dataProvider)
         {
-            this.connection = connection;
             this.infoProvider = infoProvider;
             this.dataProvider = dataProvider;
             InitializeComponent();
@@ -27,27 +26,20 @@ namespace CrawlerApp.UI
 
         private void ShowDataForm_Load(object sender, EventArgs e)
         {
-            if (!connection.IsConnected())
+            IEnumerable<DataModel> records = dataProvider.GetAllRecords();
+
+            if (!CheckForEmptyDatabase(records))
             {
-                MessageBox.Show("Проблемы с Интернет соединением!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CloseDialog();
+                Close();
                 return;
             }
 
-            var records = dataProvider.GetAllRecords();
+            UpdateLabels(records);
+            UpdateListView(records);
+        }
 
-            if (records.Count() == 0)
-            {
-                MessageBox.Show("В базе нет записей!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CloseDialog();
-                return;
-            }
-
-            lbGroupUrl.Text = infoProvider.GetSavedGroupUrl();
-            lbGroupname.Text = infoProvider.GetSavedGroupName();
-            lbLastUpdate.Text = FormatDateTime(records.Max(r => r.UpdatingTime));
-            lbRecordsCount.Text = records.Count().ToString();
-
+        private void UpdateListView(IEnumerable<DataModel> records)
+        {
             foreach (var record in records)
             {
                 listView1.Items.Add(
@@ -55,10 +47,22 @@ namespace CrawlerApp.UI
             }
         }
 
-        private void CloseDialog()
+        private void UpdateLabels(IEnumerable<DataModel> records)
         {
-            DialogResult = DialogResult.OK;
-            this.Close();
+            lbGroupUrl.Text = infoProvider.GetSavedGroupUrl();
+            lbGroupname.Text = infoProvider.GetSavedGroupName();
+            lbLastUpdate.Text = FormatDateTime(records.Max(r => r.UpdatingTime));
+            lbRecordsCount.Text = records.Count().ToString();
+        }
+
+        private bool CheckForEmptyDatabase(IEnumerable<DataModel> records)
+        {
+            if (!records.Any())
+            {
+                MessageBox.Show("В базе нет записей!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+            return true;
         }
 
         private string FormatDateTime(DateTime dateTime)

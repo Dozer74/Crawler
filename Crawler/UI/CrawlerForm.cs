@@ -13,6 +13,7 @@ namespace CrawlerApp.UI
         readonly IKernel kernel = new StandardKernel(new SettingsNinjectModule());
         private readonly IGroupInfoProvider infoProvider;
         private readonly IDatabaseProvider dataProvider;
+        private readonly IConnectionChecker connection;
 
 
         public CrawlerForm()
@@ -21,7 +22,7 @@ namespace CrawlerApp.UI
             cbSearchParams.SelectedIndex = 0;
             infoProvider = kernel.Get<IGroupInfoProvider>();
             dataProvider = kernel.Get<IDatabaseProvider>();
-
+            connection = kernel.Get<IConnectionChecker>();
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -66,14 +67,26 @@ namespace CrawlerApp.UI
 
         private void TrancuteMenuItem_Click(object sender, EventArgs e)
         {
+            if (!CheckConnection()) return;
             dataProvider.Truncate();
         }
 
         private void ShowDataMenuItem_Click(object sender, EventArgs e)
         {
-            var connection = kernel.Get<IConnectionChecker>();
-            var form = new ShowDataForm(connection, infoProvider,dataProvider);
+            if (!CheckConnection()) return;
+            var form = new ShowDataForm(infoProvider,dataProvider);
             form.ShowDialog();
+        }
+
+        private bool CheckConnection()
+        {
+            if (!connection.IsConnected())
+            {
+                MessageBox.Show("Проблемы с Интернет соединением!", "Внимание!", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return false;
+            }
+            return true;
         }
     }
 }

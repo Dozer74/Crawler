@@ -7,17 +7,17 @@ namespace CrawlerApp.DAL
         /// <summary>
         /// Добавляет указанную модель в базу данных
         /// </summary>
-        void AddRecord(DataModel model);
+        bool AddRecord(DataModel model);
 
         /// <summary>
         /// Сохраняет все произведенные изменения
         /// </summary>
-        void SaveChanges();
+        bool SaveChanges();
 
         /// <summary>
         /// Очищает базу данных
         /// </summary>
-        void Truncate();
+        bool Truncate();
 
         /// <summary>
         /// Возвращает все хранящиеся в базе модели
