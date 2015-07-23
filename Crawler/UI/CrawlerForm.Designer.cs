@@ -36,7 +36,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.tbGroupUrl = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.cbSearchParams = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listViewStatus = new System.Windows.Forms.ListView();
@@ -84,7 +83,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-            this.btnStart.Location = new System.Drawing.Point(62, 242);
+            this.btnStart.Location = new System.Drawing.Point(57, 226);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(203, 33);
             this.btnStart.TabIndex = 9;
@@ -107,19 +106,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(17, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(164, 25);
+            this.label2.Size = new System.Drawing.Size(116, 25);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Выберите группу:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12.25F);
-            this.label3.Location = new System.Drawing.Point(22, 329);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 23);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Статус:";
+            this.label2.Text = "URL группы:";
             // 
             // cbSearchParams
             // 
@@ -149,7 +138,7 @@
             this.columnHeader1});
             this.listViewStatus.GridLines = true;
             this.listViewStatus.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewStatus.Location = new System.Drawing.Point(92, 294);
+            this.listViewStatus.Location = new System.Drawing.Point(50, 265);
             this.listViewStatus.Name = "listViewStatus";
             this.listViewStatus.Size = new System.Drawing.Size(217, 93);
             this.listViewStatus.StateImageList = this.imageList1;
@@ -214,10 +203,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 399);
+            this.ClientSize = new System.Drawing.Size(316, 370);
             this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.cbSearchParams);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tbGroupUrl);
@@ -249,7 +237,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox tbGroupUrl;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbSearchParams;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListView listViewStatus;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using CrawlerApp.BL.Enums;
 using CrawlerApp.BL.Interfaces;
 using CrawlerApp.DAL;
@@ -28,41 +29,44 @@ namespace CrawlerApp.BL
 
         public void ProcessGroup(string url)
         {
-            if (!checker.IsConnected())
+            new Thread(() =>
             {
-                OnUpdate(MessageType.Error, "Проблемы с Интернет соединением! :(");
-                return;
-            }
-            OnUpdate(MessageType.Working, "Соединение с Интернет - ОК");
+                if (!checker.IsConnected())
+                {
+                    OnUpdate(MessageType.Error, "Проблемы с Интернет соединением! :(");
+                    return;
+                }
+                OnUpdate(MessageType.Working, "Соединение с Интернет - ОК");
 
-            if (!authorizer.Login())
-            {
-                OnUpdate(MessageType.Error, "Не удаётся залогиниться! :(");
-                return;
-            }
-            OnUpdate(MessageType.Working, "Вход на сайт - ОК");
+                if (!authorizer.Login())
+                {
+                    OnUpdate(MessageType.Error, "Не удаётся залогиниться! :(");
+                    return;
+                }
+                OnUpdate(MessageType.Working, "Вход на сайт - ОК");
 
-            var group = converter.GetGroupByUrl(url);
-            if (group == null)
-            {
-                OnUpdate(MessageType.Error, "Группа не найдена! :(");
-                return;
-            }
-            OnUpdate(MessageType.Working, "Поиск группы - ОК");
+                var group = converter.GetGroupByUrl(url);
+                if (group == null)
+                {
+                    OnUpdate(MessageType.Error, "Группа не найдена! :(");
+                    return;
+                }
+                OnUpdate(MessageType.Working, "Поиск группы - ОК");
 
-            OnUpdate(MessageType.Working, "Собираю информацию...");
-            var data = new DataModel
-            {
-                MembersCount = group.MembersCount ?? 0,
-                UpdatingTime = DateTime.Now
-            };
+                OnUpdate(MessageType.Working, "Собираю информацию...");
+                var data = new DataModel
+                {
+                    MembersCount = group.MembersCount ?? 0,
+                    UpdatingTime = DateTime.Now
+                };
 
-            dbProvider.AddRecord(data);
-            dbProvider.SaveChanges();
+                dbProvider.AddRecord(data);
+                dbProvider.SaveChanges();
 
-            groupInfoProvider.UpdateGroupInfo(group.Name,url);
+                groupInfoProvider.UpdateGroupInfo(group.Name, url);
 
-            OnUpdate(MessageType.Complited, "База успешно обновлена!");
+                OnUpdate(MessageType.Complited, "База успешно обновлена!");
+            }).Start();
         }
 
         #region Invocators

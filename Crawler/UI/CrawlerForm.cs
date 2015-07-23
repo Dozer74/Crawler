@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using CrawlerApp.BL;
 using CrawlerApp.BL.Enums;
 using CrawlerApp.BL.Interfaces;
 using CrawlerApp.DAL;
@@ -11,11 +12,10 @@ namespace CrawlerApp.UI
 {
     public partial class CrawlerForm : Form
     {
-        readonly IKernel kernel = new StandardKernel(new SettingsNinjectModule());
-        private readonly IGroupInfoProvider infoProvider;
-        private readonly IDatabaseProvider dataProvider;
         private readonly IConnectionChecker connection;
-
+        private readonly IDatabaseProvider dataProvider;
+        private readonly IGroupInfoProvider infoProvider;
+        private readonly IKernel kernel = new StandardKernel(new SettingsNinjectModule());
 
         public CrawlerForm()
         {
@@ -29,21 +29,28 @@ namespace CrawlerApp.UI
         private void btnStart_Click(object sender, EventArgs e)
         {
             listViewStatus.Items.Clear();
+            ChangeBtnStartState(false);
 
             if (!ContinueIfGroupsNotSame())
                 return;
 
-            var crawler = kernel.Get<BL.Crawler>();
+            var crawler = kernel.Get<Crawler>();
             crawler.Update += Crawler_Update;
 
             crawler.ProcessGroup(tbGroupUrl.Text);
+        }
+
+        private void ChangeBtnStartState(bool state)
+        {
+            btnStart.Text = state ? "Старт!" : "Working...";
+            btnStart.Enabled = state;
         }
 
         private bool ContinueIfGroupsNotSame()
         {
             if (!infoProvider.IsGroupUrlSame(tbGroupUrl.Text))
             {
-                if (MessageBox.Show(Resources.NewGroupMessage,"Внимание!",
+                if (MessageBox.Show(Resources.NewGroupMessage, "Внимание!",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
                     != DialogResult.OK)
                 {
@@ -58,7 +65,12 @@ namespace CrawlerApp.UI
 
         private void Crawler_Update(MessageType type, string message)
         {
-            listViewStatus.Items.Add(new ListViewItem(message) {StateImageIndex = (int) type});
+            Invoke(new Action(() =>
+                {
+                    listViewStatus.Items.Add(new ListViewItem(message) {StateImageIndex = (int) type});
+                    if (type != MessageType.Working)
+                        ChangeBtnStartState(true);
+                }));
         }
 
         private void CrawlerForm_Load(object sender, EventArgs e)
@@ -75,7 +87,7 @@ namespace CrawlerApp.UI
         private void ShowDataMenuItem_Click(object sender, EventArgs e)
         {
             if (!CheckConnection()) return;
-            var form = new ShowDataForm(infoProvider,dataProvider);
+            var form = new ShowDataForm(infoProvider, dataProvider);
             form.ShowDialog();
         }
 
