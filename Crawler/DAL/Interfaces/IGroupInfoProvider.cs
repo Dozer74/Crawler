@@ -1,4 +1,4 @@
-﻿namespace CrawlerApp.DAL
+﻿namespace CrawlerApp.DAL.Interfaces
 {
     public interface IGroupInfoProvider
     {

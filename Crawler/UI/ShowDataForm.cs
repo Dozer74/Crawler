@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using CrawlerApp.DAL;
+using CrawlerApp.DAL.Interfaces;
 
 namespace CrawlerApp.UI
 {

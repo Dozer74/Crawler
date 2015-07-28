@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using CrawlerApp.BL;
-using CrawlerApp.BL.Enums;
-using CrawlerApp.BL.Interfaces;
+using CrawlerApp.Crawler;
 using CrawlerApp.DAL;
+using CrawlerApp.DAL.Interfaces;
+using CrawlerApp.Interfaces;
 using CrawlerApp.Properties;
 using Ninject;
 
@@ -34,7 +34,7 @@ namespace CrawlerApp.UI
             if (!ContinueIfGroupsNotSame())
                 return;
 
-            var crawler = kernel.Get<Crawler>();
+            var crawler = kernel.Get<Crawler.Crawler>();
             crawler.Update += Crawler_Update;
 
             crawler.ProcessGroup(tbGroupUrl.Text);

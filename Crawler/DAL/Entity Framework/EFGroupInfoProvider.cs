@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using CrawlerApp.DAL.Interfaces;
 using CrawlerApp.Properties;
 
-namespace CrawlerApp.DAL
+namespace CrawlerApp.DAL.Entity_Framework
 {
     internal class EFGroupInfoProvider : IGroupInfoProvider
     {

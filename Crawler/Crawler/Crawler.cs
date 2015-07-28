@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
-using CrawlerApp.BL.Enums;
-using CrawlerApp.BL.Interfaces;
 using CrawlerApp.DAL;
+using CrawlerApp.DAL.Interfaces;
+using CrawlerApp.Interfaces;
 
-namespace CrawlerApp.BL
+namespace CrawlerApp.Crawler
 {
     public class Crawler : ICrawler
     {

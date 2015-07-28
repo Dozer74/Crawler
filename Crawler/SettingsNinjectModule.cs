@@ -1,7 +1,10 @@
 ﻿using System;
-using CrawlerApp.BL;
-using CrawlerApp.BL.Interfaces;
+using CrawlerApp.Crawler;
 using CrawlerApp.DAL;
+using CrawlerApp.DAL.Entity_Framework;
+using CrawlerApp.DAL.Interfaces;
+using CrawlerApp.Interfaces;
+using CrawlerApp.VK;
 using Ninject.Modules;
 using VkNet;
 
@@ -29,7 +32,7 @@ namespace CrawlerApp
                 .WithConstructorArgument("userName", UserName)
                 .WithConstructorArgument("password", Password);
 
-            Bind<BL.Crawler>().ToSelf();
+            Bind<Crawler.Crawler>().ToSelf();
         }
     }
 }

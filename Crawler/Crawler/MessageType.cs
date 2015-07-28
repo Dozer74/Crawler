@@ -1,4 +1,4 @@
-﻿namespace CrawlerApp.BL.Enums
+﻿namespace CrawlerApp.Crawler
 {
     public enum MessageType
     {

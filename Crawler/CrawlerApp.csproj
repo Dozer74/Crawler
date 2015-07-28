@@ -89,20 +89,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\DataModel.cs" />
-    <Compile Include="BL\Enums\MessageType.cs" />
-    <Compile Include="BL\Interfaces\IAuthorizer.cs" />
-    <Compile Include="BL\Interfaces\IUrlConverter.cs" />
-    <Compile Include="BL\ConnectionChecker.cs" />
-    <Compile Include="BL\Crawler.cs" />
-    <Compile Include="BL\Interfaces\IConnectionChecker.cs" />
-    <Compile Include="BL\Interfaces\ICrawler.cs" />
-    <Compile Include="BL\VkUrlConverter.cs" />
-    <Compile Include="BL\VkAuthorizer.cs" />
-    <Compile Include="BL\Enums\VkontakteScopeList.cs" />
-    <Compile Include="DAL\EFDataProvider.cs" />
-    <Compile Include="DAL\EFGroupInfoProvider.cs" />
-    <Compile Include="DAL\IDatabaseProvider.cs" />
-    <Compile Include="DAL\IGroupInfoProvider.cs" />
+    <Compile Include="Crawler\MessageType.cs" />
+    <Compile Include="Interfaces\IAuthorizer.cs" />
+    <Compile Include="Interfaces\IUrlConverter.cs" />
+    <Compile Include="Crawler\ConnectionChecker.cs" />
+    <Compile Include="Crawler\Crawler.cs" />
+    <Compile Include="Interfaces\IConnectionChecker.cs" />
+    <Compile Include="Interfaces\ICrawler.cs" />
+    <Compile Include="VK\VkUrlConverter.cs" />
+    <Compile Include="VK\VkAuthorizer.cs" />
+    <Compile Include="VK\VkontakteScopeList.cs" />
+    <Compile Include="DAL\Entity Framework\EFDataProvider.cs" />
+    <Compile Include="DAL\Entity Framework\EFGroupInfoProvider.cs" />
+    <Compile Include="DAL\Interfaces\IDatabaseProvider.cs" />
+    <Compile Include="DAL\Interfaces\IGroupInfoProvider.cs" />
     <Compile Include="GroupInfo.cs">
       <DependentUpon>Statistic.tt</DependentUpon>
     </Compile>

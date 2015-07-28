@@ -1,9 +1,9 @@
-﻿using CrawlerApp.BL.Interfaces;
+﻿using CrawlerApp.Interfaces;
 using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Exception;
 
-namespace CrawlerApp.BL
+namespace CrawlerApp.VK
 {
     internal class VkAuthorizer : IAuthorizer
     {

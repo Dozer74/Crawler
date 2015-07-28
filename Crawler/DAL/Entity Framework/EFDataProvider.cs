@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrawlerApp.DAL.Interfaces;
 
-namespace CrawlerApp.DAL
+namespace CrawlerApp.DAL.Entity_Framework
 {
     class EFDataProvider : IDatabaseProvider
     {

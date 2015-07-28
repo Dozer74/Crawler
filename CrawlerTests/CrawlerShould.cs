@@ -1,6 +1,7 @@
-﻿using CrawlerApp.BL;
-using CrawlerApp.BL.Interfaces;
+﻿using CrawlerApp.Crawler;
 using CrawlerApp.DAL;
+using CrawlerApp.DAL.Interfaces;
+using CrawlerApp.Interfaces;
 using Moq;
 using NUnit.Framework;
 
