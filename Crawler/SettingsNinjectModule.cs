@@ -22,6 +22,7 @@ namespace CrawlerApp
 
             Bind<IDatabaseProvider>().To<EFDataProvider>();
             Bind<IGroupInfoProvider>().To<EFGroupInfoProvider>();
+            Bind<IWebClient>().To<SimpleWebClient>();
 
             Bind<IConnectionChecker>()
                 .To<ConnectionChecker>()

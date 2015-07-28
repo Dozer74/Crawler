@@ -8,6 +8,6 @@ namespace CrawlerApp.Interfaces
         /// Осуществляет преобразование url в структуру VkNet.Group
         /// </summary>
         /// <returns>Null, если не удалось найти группу</returns>
-        Group GetGroupByUrl(string url);
+        long GetGroupIdByUrl(string url);
     }
 }

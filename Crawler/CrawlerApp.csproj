@@ -88,6 +88,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crawler\SimpleWebClient.cs" />
     <Compile Include="DAL\DataModel.cs" />
     <Compile Include="Crawler\MessageType.cs" />
     <Compile Include="Interfaces\IAuthorizer.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Crawler\Crawler.cs" />
     <Compile Include="Interfaces\IConnectionChecker.cs" />
     <Compile Include="Interfaces\ICrawler.cs" />
+    <Compile Include="Interfaces\IWebClient.cs" />
     <Compile Include="VK\VkUrlConverter.cs" />
     <Compile Include="VK\VkAuthorizer.cs" />
     <Compile Include="VK\VkontakteScopeList.cs" />

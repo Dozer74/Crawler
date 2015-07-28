@@ -1,37 +1,30 @@
-﻿using System;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using CrawlerApp.Interfaces;
-using VkNet;
-using VkNet.Enums.Filters;
-using Group = VkNet.Model.Group;
 
 namespace CrawlerApp.VK
 {
-    internal class VkUrlConverter : IUrlConverter
+    public class VkUrlConverter : IUrlConverter
     {
-        private readonly VkApi api;
+        private readonly IWebClient webClient;
 
-        public VkUrlConverter(VkApi api)
+        public VkUrlConverter(IWebClient webClient)
         {
-            this.api = api;
+            this.webClient = webClient;
         }
-
-        public Group GetGroupByUrl(string url)
+        
+        public long GetGroupIdByUrl(string url)
         {
             var regex = new Regex(@"(?<=/photo-)\d+", RegexOptions.Compiled);
-            var client = new WebClient {Encoding = Encoding.UTF8};
-            try
+
+            var data = webClient.DownloadString(url);
+
+            if (regex.IsMatch(data))
             {
-                var data = client.DownloadString(url);
                 var groupId = long.Parse(regex.Match(data).Value);
-                return api.Groups.GetById(groupId, GroupsFields.MembersCount);
+                return groupId;
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            else return 0;
+
         }
     }
 }

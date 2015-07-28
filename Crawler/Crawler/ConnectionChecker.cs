@@ -1,36 +1,23 @@
 ﻿using System;
-using System.Net;
-using System.Net.NetworkInformation;
 using CrawlerApp.Interfaces;
 
 namespace CrawlerApp.Crawler
 {
-    internal class ConnectionChecker : IConnectionChecker
+    public class ConnectionChecker : IConnectionChecker
     {
         private readonly Uri urlForConnectionTest;
+        private readonly IWebClient webClient;
 
-        public ConnectionChecker(Uri urlForConnectionTest)
+        public ConnectionChecker(Uri urlForConnectionTest, IWebClient webClient)
         {
             this.urlForConnectionTest = urlForConnectionTest;
+            this.webClient = webClient;
         }
 
         public bool IsConnected()
         {
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                return false;
-            }
-            
-            var client = new WebClient();
-            try
-            {
-                var response = client.DownloadString(urlForConnectionTest);
-                return !string.IsNullOrEmpty(response);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            var response = webClient.DownloadString(urlForConnectionTest);
+            return !string.IsNullOrEmpty(response);
         }
     }
 }

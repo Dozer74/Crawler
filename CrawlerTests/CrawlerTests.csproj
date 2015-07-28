@@ -60,7 +60,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrawlerShould.cs" />
+    <Compile Include="ConnectionCheckerTests.cs" />
+    <Compile Include="CrawlerTests.cs" />
+    <Compile Include="GroupConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

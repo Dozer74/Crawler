@@ -3,11 +3,14 @@ using System.Threading;
 using CrawlerApp.DAL;
 using CrawlerApp.DAL.Interfaces;
 using CrawlerApp.Interfaces;
+using VkNet;
+using VkNet.Enums.Filters;
 
 namespace CrawlerApp.Crawler
 {
     public class Crawler : ICrawler
     {
+        private readonly VkApi api;
         private readonly IConnectionChecker checker;
         private readonly IUrlConverter converter;
         private readonly IAuthorizer authorizer;
@@ -18,8 +21,9 @@ namespace CrawlerApp.Crawler
 
         public event UpdateDelegate Update;
 
-        public Crawler(IConnectionChecker checker, IAuthorizer authorizer, IUrlConverter converter, IDatabaseProvider databaseDbProvider, IGroupInfoProvider groupInfoProvider)
+        public Crawler(VkApi api, IConnectionChecker checker, IAuthorizer authorizer, IUrlConverter converter, IDatabaseProvider databaseDbProvider, IGroupInfoProvider groupInfoProvider)
         {
+            this.api = api;
             this.checker = checker;
             this.converter = converter;
             this.authorizer = authorizer;
@@ -29,44 +33,54 @@ namespace CrawlerApp.Crawler
 
         public void ProcessGroup(string url)
         {
-            new Thread(() =>
+            if (!checker.IsConnected())
             {
-                if (!checker.IsConnected())
-                {
-                    OnUpdate(MessageType.Error, "Проблемы с Интернет соединением! :(");
-                    return;
-                }
-                OnUpdate(MessageType.Working, "Соединение с Интернет - ОК");
+                OnUpdate(MessageType.Error, "Проблемы с Интернет соединением! :(");
+                return;
+            }
+            OnUpdate(MessageType.Working, "Соединение с Интернет - ОК");
 
-                if (!authorizer.Login())
-                {
-                    OnUpdate(MessageType.Error, "Не удаётся залогиниться! :(");
-                    return;
-                }
-                OnUpdate(MessageType.Working, "Вход на сайт - ОК");
+            if (!authorizer.Login())
+            {
+                OnUpdate(MessageType.Error, "Не удаётся залогиниться! :(");
+                return;
+            }
+            OnUpdate(MessageType.Working, "Вход на сайт - ОК");
 
-                var group = converter.GetGroupByUrl(url);
-                if (group == null)
-                {
-                    OnUpdate(MessageType.Error, "Группа не найдена! :(");
-                    return;
-                }
-                OnUpdate(MessageType.Working, "Поиск группы - ОК");
+            var groupId = converter.GetGroupIdByUrl(url);
+            if (groupId == 0)
+            {
+                OnUpdate(MessageType.Error, "Группа не найдена! :(");
+                return;
+            }
+            OnUpdate(MessageType.Working, "Поиск группы - ОК");
 
-                OnUpdate(MessageType.Working, "Собираю информацию...");
-                var data = new DataModel
-                {
-                    MembersCount = group.MembersCount ?? 0,
-                    UpdatingTime = DateTime.Now
-                };
+            var group = api.Groups.GetById(groupId, GroupsFields.MembersCount);
 
-                dbProvider.AddRecord(data);
-                dbProvider.SaveChanges();
+            OnUpdate(MessageType.Working, "Собираю информацию...");
+            var data = new DataModel
+            {
+                MembersCount = group.MembersCount ?? 0,
+                UpdatingTime = DateTime.Now
+            };
 
-                groupInfoProvider.UpdateGroupInfo(group.Name, url);
+            dbProvider.AddRecord(data);
+            dbProvider.SaveChanges();
 
-                OnUpdate(MessageType.Complited, "База успешно обновлена!");
-            }).Start();
+            groupInfoProvider.UpdateGroupInfo(group.Name, url);
+
+            OnUpdate(MessageType.Complited, "База успешно обновлена!");
+        }
+
+        public void ProcessGroupAsync(string url)
+        {
+            new Thread(ProcessGroup).Start(url);
+        }
+
+
+        private void ProcessGroup(object url)
+        {
+            ProcessGroup((string)url);
         }
 
         #region Invocators
@@ -76,7 +90,7 @@ namespace CrawlerApp.Crawler
             Update?.Invoke(type, message);
         }
 
-        #endregion
+#endregion
 
     }
 }

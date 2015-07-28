@@ -1,14 +1,14 @@
 ﻿using CrawlerApp.Crawler;
-using CrawlerApp.DAL;
 using CrawlerApp.DAL.Interfaces;
 using CrawlerApp.Interfaces;
 using Moq;
 using NUnit.Framework;
+using VkNet;
 
 namespace CrawlerTests
 {
     [TestFixture]
-    public class CrawlerShould
+    public class CrawlerTests
     {
         [SetUp]
         public void Init()
@@ -33,13 +33,13 @@ namespace CrawlerTests
             converterMock.SetupAllProperties();
             dataProviderMock.SetupAllProperties();
 
-            var crawler = new Crawler(connectionMock.Object, loginMock.Object, converterMock.Object,
+            var crawler = new Crawler(null, connectionMock.Object, loginMock.Object, converterMock.Object,
                 dataProviderMock.Object, null);
             crawler.ProcessGroup(TestUrl);
 
             connectionMock.Verify(m => m.IsConnected(), Times.Once);
             loginMock.Verify(m => m.Login(), Times.Once);
-            converterMock.Verify(m => m.GetGroupByUrl(TestUrl), Times.Once);
+            converterMock.Verify(m => m.GetGroupIdByUrl(TestUrl), Times.Once);
             dataProviderMock.Verify(m => m.SaveChanges(), Times.Never);
         }
 
@@ -50,12 +50,12 @@ namespace CrawlerTests
             loginMock.SetupAllProperties();
             converterMock.SetupAllProperties();
 
-            var crawler = new Crawler(connectionMock.Object, loginMock.Object, converterMock.Object, null, null);
+            var crawler = new Crawler(new VkApi(), connectionMock.Object, loginMock.Object, converterMock.Object, null, null);
             crawler.ProcessGroup(TestUrl);
 
             connectionMock.Verify(m => m.IsConnected(), Times.Once);
             loginMock.Verify(m => m.Login(), Times.Once);
-            converterMock.Verify(m => m.GetGroupByUrl(TestUrl), Times.Never);
+            converterMock.Verify(m => m.GetGroupIdByUrl(TestUrl), Times.Never);
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace CrawlerTests
             connectionMock.SetupAllProperties();
             loginMock.SetupAllProperties();
 
-            var crawler = new Crawler(connectionMock.Object, loginMock.Object, null, null, null);
+            var crawler = new Crawler(null, connectionMock.Object, loginMock.Object, null, null, null);
             crawler.ProcessGroup(TestUrl);
 
             connectionMock.Verify(m => m.IsConnected(), Times.Once);
