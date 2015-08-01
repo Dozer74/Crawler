@@ -37,7 +37,7 @@ namespace CrawlerApp.UI
             var crawler = kernel.Get<Crawler.Crawler>();
             crawler.Update += Crawler_Update;
 
-            crawler.ProcessGroup(tbGroupUrl.Text);
+            crawler.ProcessGroupAsync(tbGroupUrl.Text);
         }
 
         private void ChangeBtnStartState(bool state)
