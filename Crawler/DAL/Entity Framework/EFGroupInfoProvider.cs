@@ -1,29 +1,29 @@
-﻿using CrawlerApp.DAL.Interfaces;
-using CrawlerApp.Properties;
+﻿using System.Linq;
+using CrawlerApp.DAL.Interfaces;
 
 namespace CrawlerApp.DAL.Entity_Framework
 {
     internal class EFGroupInfoProvider : IGroupInfoProvider
     {
         private readonly StatisticEntities db = new StatisticEntities();
-        readonly Settings settings = Settings.Default;
+        //readonly Settings settings = Settings.Default;
 
         public bool IsGroupUrlSame(string groupUrl)
         {
-            return string.Equals(groupUrl, settings.SavedGroupUrl);
-            //return string.Equals(groupUrl, GetSavedGroupUrl());
+            //return string.Equals(groupUrl, settings.SavedGroupUrl);
+            return string.Equals(groupUrl, GetSavedGroupUrl());
         }
 
         public string GetSavedGroupUrl()
         {
-            //return db.GroupInfo.FirstOrDefault()?.GroupUrl;
-            return settings.SavedGroupUrl;
+            return db.GroupInfo.FirstOrDefault()?.GroupUrl;
+            //return settings.SavedGroupUrl;
         }
 
         public string GetSavedGroupName()
         {
-            //return db.GroupInfo.FirstOrDefault()?.GroupName;
-            return settings.SavedGroupName;
+            return db.GroupInfo.FirstOrDefault()?.GroupName;
+            //return settings.SavedGroupName;
         }
 
         public void UpdateGroupInfo(string groupName, string groupUrl)
@@ -33,9 +33,9 @@ namespace CrawlerApp.DAL.Entity_Framework
 
             db.SaveChanges();
 
-            settings.SavedGroupUrl = groupUrl;
-            settings.SavedGroupName = groupName;
-            settings.Save();
+//            settings.SavedGroupUrl = groupUrl;
+//            settings.SavedGroupName = groupName;
+//            settings.Save();
         }
     }
 }
