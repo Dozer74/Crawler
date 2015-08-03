@@ -75,7 +75,12 @@ namespace CrawlerApp.UI
 
         private void CrawlerForm_Load(object sender, EventArgs e)
         {
-            tbGroupUrl.Text = infoProvider.GetSavedGroupUrl();
+            if (!CheckConnection())
+            {
+                Application.Exit();
+                return;
+            }
+                tbGroupUrl.Text = infoProvider.GetSavedGroupUrl();
         }
 
         private void TrancuteMenuItem_Click(object sender, EventArgs e)
